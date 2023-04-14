@@ -1,0 +1,7 @@
+# A minimum git ignore for wary small project like this
+
+
+.env
+.venv
+env/
+venv/
