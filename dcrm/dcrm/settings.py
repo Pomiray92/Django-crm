@@ -88,8 +88,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "django_crm",
-        "USER": "postgres1",
-        "PASSWORD": "postgres1",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
         "HOST": "localhost",
         "PORT": "5432",
     }

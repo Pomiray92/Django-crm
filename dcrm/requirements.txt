@@ -1,47 +1,44 @@
-asgiref                3.6.0
-asttokens              2.2.1
-backcall               0.2.0
-backports.zoneinfo     0.2.1
-certifi                2022.12.7
-charset-normalizer     3.1.0
-decorator              5.1.1
-Django                 4.1.7
-django-extensions      3.2.1
-executing              1.2.0
-idna                   3.4
-ipython                8.12.0
-jedi                   0.18.2
-jsonpatch              1.32
-jsonpointer            2.3
-matplotlib-inline      0.1.6
-mysql-connector        2.2.9
-mysql-connector-python 8.0.32
-networkx               3.1
-numpy                  1.24.2
-parso                  0.8.3
-pexpect                4.8.0
-pickleshare            0.7.5
-Pillow                 9.5.0
-pip                    23.0.1
-pkg_resources          0.0.0
-plus                   1994.12.4
-prompt-toolkit         3.0.38
-protobuf               3.20.3
-psycopg2-binary        2.9.5
-ptyprocess             0.7.0
-pure-eval              0.2.2
-Pygments               2.14.0
-requests               2.28.2
-scipy                  1.10.1
-setuptools             44.0.0
-shell                  1.0.1
-six                    1.16.0
-sqlparse               0.4.3
-stack-data             0.6.2
-tornado                6.2
-traitlets              5.9.0
-typing_extensions      4.5.0
-urllib3                1.26.15
-visdom                 0.2.4
-wcwidth                0.2.6
-websocket-client       1.5.1
+asgiref                
+asttokens           
+backcall             
+backports.zoneinfo     
+certifi               
+charset-normalizer   
+decorator             
+Django                
+django-extensions      
+executing          
+idna                
+ipython                
+jedi                 
+jsonpatch         
+jsonpointer          
+matplotlib-inline     
+mysql-connector        
+mysql-connector-python 
+networkx              
+numpy                
+parso                
+pexpect            
+pickleshare                                           
+plus                  
+prompt-toolkit        
+protobuf            
+psycopg2-binary    
+ptyprocess          
+pure-eval         
+Pygments            
+requests               
+scipy                 
+setuptools             
+shell            
+six                  
+sqlparse               
+stack-data            
+tornado                
+traitlets              
+typing_extensions      
+urllib3                
+visdom                 
+wcwidth                
+websocket-client       
