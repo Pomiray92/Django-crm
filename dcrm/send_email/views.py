@@ -16,7 +16,7 @@ def send(request):
             message = form.cleaned_data['message']
             send_mail(
                 subject=subject,
-                message=message,
+                message=message.title(),
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[recipient],
                 )
