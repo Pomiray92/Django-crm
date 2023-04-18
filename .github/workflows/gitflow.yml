@@ -47,7 +47,7 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }} # secret saved in github .env
           # GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
           # GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-        run: cd django && python manage.py makemigrations
+        run: cd dcrm && python manage.py makemigrations
       - name: Run Database Migrations
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
