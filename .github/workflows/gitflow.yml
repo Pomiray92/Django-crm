@@ -41,7 +41,7 @@ jobs:
 
       ### CI for Django
       - name: Install requirements
-        run: cd django && pip install -r requirements.txt
+        run: pip install -r requirements.txt
       - name: Run Database MakeMigrations
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }} # secret saved in github .env
