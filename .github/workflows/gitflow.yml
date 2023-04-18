@@ -1,0 +1,65 @@
+# name of our workflow
+name: gitflow Workflow Django
+
+# triggers for our workflow
+on: [push]
+
+jobs:
+  health-check-job: # health check job for testing and code formatting check
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        # the environment variable must match with app/settings.py
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github-actions
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      # checking our the code at current commit that triggers the workflow
+      - name: Checkout code
+        uses: actions/checkout@v2
+      # caching dependency will make our build faster.
+      # for more info checkout pip section documentation at https://github.com/actions/cache
+      - name: Cache dependency
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Setup python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Check Python version
+        run: python --version
+
+      ### CI for Django
+      - name: Install requirements
+        run: cd django && pip install -r requirements.txt
+      - name: Run Database MakeMigrations
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }} # secret saved in github .env
+          # GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
+          # GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        run: cd django && python manage.py makemigrations
+      - name: Run Database Migrations
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          # GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
+          # GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        run: cd django && python manage.py migrate
+      # - name: Run django tests (pytest with coverage)
+      #   env:
+      #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      #     GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
+      #     GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      #   run: cd django && pytest -v --cov -p no:cacheprovider
+
+
+   
