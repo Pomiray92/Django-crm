@@ -53,7 +53,7 @@ jobs:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           # GOOGLE_SECRET: ${{ secrets.GOOGLE_SECRET }}
           # GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-        run: cd django && python manage.py migrate
+        run: cd dcrm && python manage.py migrate
       # - name: Run django tests (pytest with coverage)
       #   env:
       #     SECRET_KEY: ${{ secrets.SECRET_KEY }}
