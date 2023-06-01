@@ -4,7 +4,6 @@ from django.db import models
 from django.db import models
 
 
-
 class Notification(models.Model):
     recipient = models.EmailField()
     subject = models.CharField(max_length=100)

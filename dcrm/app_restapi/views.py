@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 # from django.http import HttpResponse
 import requests
 
@@ -10,22 +11,23 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
 
+
 class GetInfoView(View):
-    template_name = 'app_restapi/download.html'
+    template_name = "app_restapi/download.html"
 
     def get(self, request):
         info = [
             {"id": 1, "title": "Book 1", "author": "Author 1"},
             {"id": 2, "title": "Book 2", "author": "Author 2"},
-            {"id": 3, "title": "Book 3", "author": "Author 3"}
+            {"id": 3, "title": "Book 3", "author": "Author 3"},
         ]
-        return render(request, self.template_name, {'info': info})
+        return render(request, self.template_name, {"info": info})
 
     def post(self, request):
         info = [
             {"id": 1, "title": "Book 1", "author": "Author 1"},
             {"id": 2, "title": "Book 2", "author": "Author 2"},
-            {"id": 3, "title": "Book 3", "author": "Author 3"}
+            {"id": 3, "title": "Book 3", "author": "Author 3"},
         ]
 
         # Create the PDF object
@@ -38,7 +40,7 @@ class GetInfoView(View):
         y = 700
         row_height = 20
         column_widths = [50, 200, 200]
-        column_titles = ['ID', 'Title', 'Author']
+        column_titles = ["ID", "Title", "Author"]
 
         # Draw the column headers
         x = 40
@@ -50,11 +52,11 @@ class GetInfoView(View):
         y -= row_height
         for item in info:
             x = 40
-            p.drawString(x, y, str(item['id']))
+            p.drawString(x, y, str(item["id"]))
             x += column_widths[0]
-            p.drawString(x, y, item['title'])
+            p.drawString(x, y, item["title"])
             x += column_widths[1]
-            p.drawString(x, y, item['author'])
+            p.drawString(x, y, item["author"])
             y -= row_height
 
         # Close the PDF object
@@ -62,18 +64,19 @@ class GetInfoView(View):
         p.save()
 
         # Redirect to the download URL
-        download_url = reverse('restapi:download_info')
+        download_url = reverse("restapi:download_info")
         return redirect(download_url)
 
 
 def download_info(request):
-    with open("info.pdf", 'rb') as f:
-        response = HttpResponse(f.read(), content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="info.pdf"'
+    with open("info.pdf", "rb") as f:
+        response = HttpResponse(f.read(), content_type="application/pdf")
+        response["Content-Disposition"] = 'attachment; filename="info.pdf"'
     return response
 
+
 def download_info(request):
-    with open("info.pdf", 'rb') as f:
-        response = HttpResponse(f.read(), content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="info.pdf"'
+    with open("info.pdf", "rb") as f:
+        response = HttpResponse(f.read(), content_type="application/pdf")
+        response["Content-Disposition"] = 'attachment; filename="info.pdf"'
     return response
