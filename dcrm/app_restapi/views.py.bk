@@ -1,0 +1,64 @@
+from django.shortcuts import render
+# from django.http import HttpResponse
+import requests
+
+# Create your views here.
+
+from django.http import HttpResponse
+from django.shortcuts import render
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.shortcuts import redirect
+from django.urls import reverse
+
+def get_info(request):
+    info = [
+        {"id": 1, "title": "Book 1", "author": "Author 1"},
+        {"id": 2, "title": "Book 2", "author": "Author 2"},
+        {"id": 3, "title": "Book 3", "author": "Author 3"}
+    ]
+
+    if request.method == 'POST':
+        # Create the PDF object
+        p = canvas.Canvas("info.pdf", pagesize=letter)
+
+        # Set up the fonts
+        p.setFont("Helvetica", 12)
+
+        # Define the positions for the column headers and content in the PDF
+        y = 700
+        row_height = 20
+        column_widths = [50, 200, 200]
+        column_titles = ['ID', 'Title', 'Author']
+
+        # Draw the column headers
+        x = 40
+        for i in range(len(column_titles)):
+            p.drawString(x, y, column_titles[i])
+            x += column_widths[i]
+
+        # Draw the info
+        y -= row_height
+        for item in info:
+            x = 40
+            p.drawString(x, y, str(item['id']))
+            x += column_widths[0]
+            p.drawString(x, y, item['title'])
+            x += column_widths[1]
+            p.drawString(x, y, item['author'])
+            y -= row_height
+
+        # Close the PDF object
+        p.showPage()
+        p.save()
+
+        # Redirect to the download URL
+        download_url = reverse('restapi:download_info')
+        return redirect(download_url)
+    return render(request, 'app_restapi/download.html', {'info': info})
+
+def download_info(request):
+    with open("info.pdf", 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="info.pdf"'
+    return response

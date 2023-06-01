@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "website",
     "send_email",
-    "django_extensions",
+    "app_restapi",
 ]
 
 
